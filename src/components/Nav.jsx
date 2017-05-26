@@ -12,7 +12,7 @@ const Nav = (props) => {
         <div className="nav__links">
           <NavLink to="/" exact activeClassName="nav__link-active">pics</NavLink>
           <NavLink to="/category/analog" activeClassName="nav__link-active">analog</NavLink>
-          <NavLink to="/likes" activeClassName="nav__link-active">favorite</NavLink>
+          <NavLink to="/favorite" activeClassName="nav__link-active">favorite</NavLink>
         </div>
       </nav>
       {props.children}

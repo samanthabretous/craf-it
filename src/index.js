@@ -20,16 +20,16 @@ render(
         <Nav>
           <Route exact path='/' render={({ match }) => {
               getCategory(match);
-              return <Posts />
+              return <Posts type="posts"/>
             }}
           />
           <Route path='/category/:category' render={({ match }) => {
               // use redux thunk to obtain info
               getCategory(match);
-              return <Posts />
+              return <Posts type="posts" />
             }}
           />
-          <Route path='/likes'/>
+        <Route path='/favorite' component={Posts} />
         </Nav>
       </Switch>
     </Router>

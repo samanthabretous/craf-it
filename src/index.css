@@ -10,6 +10,15 @@ body {
   pading: 0;
 }
 
+button {
+  background: none;
+  border: none;
+}
+
+h4 {
+  margin: 0;
+}
+
 main {
   width: 100vw;
   display: flex;
@@ -195,4 +204,9 @@ postCard
   left: 0;
   transform: rotate(45deg);
   transform-origin :100% 100%;
+}
+
+.postItem__like-active:before,
+.postItem__like-active:after {
+  background: red;
 }
