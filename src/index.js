@@ -11,25 +11,31 @@ import './index.css';
 const getCategory = ({ params }) => {
   // determine weather we are on the home page
   const category = params.category ? params.category : 'pics';
-  store.dispatch(getPostsAysnc(category))
-}
+  store.dispatch(getPostsAysnc(category));
+};
+
 render(
   <Provider store={store}>
     <Router>
       <Switch>
         <Nav>
-          <Route exact path='/' render={({ match }) => {
+          <Route
+            exact
+            path="/"
+            render={({ match }) => {
               getCategory(match);
-              return <Posts type="posts"/>
+              return <Posts type="posts" />
             }}
           />
-          <Route path='/category/:category' render={({ match }) => {
+          <Route
+            path="/category/:category"
+            render={({ match }) => {
               // use redux thunk to obtain info
               getCategory(match);
               return <Posts type="posts" />
             }}
           />
-        <Route path='/favorite' component={Posts} />
+          <Route path="/favorite" component={Posts} />
         </Nav>
       </Switch>
     </Router>

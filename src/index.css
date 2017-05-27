@@ -105,14 +105,6 @@ postCard
   margin-bottom: 40px;
 }
 
-.postItem__like {
-  display: flex;
-  flex-direction: column;
-  margin:0 1%;
-  width: 50px;
-  height: auto;
-}
-
 .postItem__thumbnail {
   width: 70px;
   height: 70px;
@@ -171,6 +163,8 @@ LIKES
 .heart {
   position: relative;
   height: 3vw;
+  margin:0 1%;
+  width: 50px;
 }
 .heart:before,
 .heart:after {

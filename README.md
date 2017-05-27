@@ -2,6 +2,8 @@
 
 A mini - subreddit clone.
 
+![craf-it_ui](https://github.com/samanthabretous/craf-it/blob/master/craf-it_ui_samanthabretous.png)
+
 ### Features
 1. Persist the user's favorites
 2. Meaningful animation
@@ -11,10 +13,13 @@ A mini - subreddit clone.
 6. A method to select a post as a favorite
 7. A method to remove a post from the list of favorites
 
+![heart-animation](https://github.com/samanthabretous/craf-it/blob/master/heart_animation_samanthabretous.gif)
+
 ### Run the project `npm install && npm start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
 
 **Technologies and frameworks:**
   * [React](https://facebook.github.io/react/)

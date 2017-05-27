@@ -1,18 +1,17 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../redux/posts';
 import { PostItem } from './index';
 
 const Posts = (props) => {
-  const getFavoritePost = () => {
-    return JSON.parse(localStorage.getItem('favoritePosts'));
-  };
+  const getFavoritePost = () => JSON.parse(localStorage.getItem('favoritePosts'));
 
   const updateFavoritePost = (postId) => {
     // check to see if post matches any of the users favorite post that is stored in localStorage
     if (Array.isArray(getFavoritePost())) {
-      return getFavoritePost().filter(({ data }) => data.id === postId)[0];
+      return getFavoritePost().filter(({ data }) => data.id === postId).length > 0;
     }
   };
 
@@ -21,19 +20,37 @@ const Posts = (props) => {
       <section className="posts">
         {props.type && props.posts
           && props.posts.map((post, index) => (
-            <PostItem key={post.data.id} fav={updateFavoritePost(post.data.id)} type={props.type} index={index + 1} data={post.data}/>
+            <PostItem
+              key={post.data.id}
+              fav={updateFavoritePost(post.data.id)}
+              type={props.type}
+              index={index + 1}
+              data={post.data}
+            />
           ))
         }
-        {!props.type && getFavoritePost() &&
-          getFavoritePost().map((post, index) => <PostItem key={post.data.id} index={index + 1} fav data={post.data}/>)
+        {!props.type && getFavoritePost()
+          && getFavoritePost().map((post, index) => (
+            <PostItem key={post.data.id} index={index + 1} fav data={post.data} />
+          ))
         }
       </section>
       <aside />
     </main>
-  )
-}
+  );
+};
 
-const mapDispatchToProps = (dispatch) => (
+Posts.propTypes = {
+  type: PropTypes.string,
+  posts: PropTypes.arrayOf(PropTypes.object),
+};
+
+Posts.defaultProps = {
+  type: '',
+  posts: null,
+};
+
+const mapDispatchToProps = dispatch => (
   bindActionCreators(actions, dispatch)
 );
 
