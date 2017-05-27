@@ -30,7 +30,8 @@ main {
 
 aside {
   width: 20%;
-  background: yellow;
+  background: #369;
+  height: calc(100vh - 50px);
 }
 /* ----------------------------
 NAV
@@ -38,7 +39,7 @@ NAV
 nav {
   background: rgb(207, 227, 247);
   color: #5f99cf;
-  height: auto;
+  height: 50px;
   padding: 0;
   display: flex;
   justify-content: flex-start;
@@ -108,7 +109,7 @@ postCard
   display: flex;
   flex-direction: column;
   margin:0 1%;
-  width: 40px;
+  width: 50px;
   height: auto;
 }
 
@@ -136,7 +137,7 @@ postCard
   flex-direction: column;
   height: 70px;
   margin-left: 7px;
-  width: calc(100% - 190px);
+  width: calc(100% - 200px);
 }
 .postItem__title {
   margin: 0;
@@ -165,23 +166,8 @@ postCard
 }
 
 /* ----------------------------
-.ad
+LIKES
 ------------------------------*/
-.ad {
-  width: 25vw;
-  background: #aaa;
-  height: 100%;
-}
-.ad input {
-  width: 98%;
-  font-size: 1.5rem;
-  padding: 2.5px;
-}
-.ad img{
-  width: 100%;
-  height: 50%;
-}
-
 .heart {
   position: relative;
   height: 3vw;
@@ -206,7 +192,63 @@ postCard
   transform-origin :100% 100%;
 }
 
+.heart-active:before,
+.heart-active:after {
+  background: red;
+}
+
+.postItem__like-active {
+  position: relative;
+  height: 3vw;
+  z-index: 1;
+  top: 0;
+}
 .postItem__like-active:before,
 .postItem__like-active:after {
+  position: absolute;
+  content: "";
+  left: 20px;
+  top: 0;
+  width: 20px;
+  height: 35px;
   background: red;
+  border-radius: 20px 20px 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+  opacity: 0;
+}
+
+.postItem__like-active:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin :100% 100%;
+}
+.postItem__like-activeShow.postItem__like-active {
+  animation: move .5s ease-out forwards
+}
+.postItem__like-activeShow.postItem__like-active:before,
+.postItem__like-activeShow.postItem__like-active:after {
+  animation: like .5s ease-out forwards
+}
+
+@keyframes move {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -40px;
+  }
+}
+@keyframes like {
+  0% {
+    opacity: 0;
+    background: pink;
+  }
+  50% {
+    opacity: 1
+  }
+  100% {
+    opacity: 0;
+    background: red;
+  }
 }

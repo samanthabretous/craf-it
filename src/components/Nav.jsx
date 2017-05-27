@@ -1,13 +1,12 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import readitLogo from '../images/readitLogo.png';
 
 const Nav = (props) => {
   return (
     <section>
       <nav>
         <figure className="nav__link-home">
-          <img src={readitLogo} alt="readit Logo"/>
+          <img src="readitLogo.png" alt="readit Logo"/>
         </figure>
         <div className="nav__links">
           <NavLink to="/" exact activeClassName="nav__link-active">pics</NavLink>
@@ -19,9 +18,5 @@ const Nav = (props) => {
     </section>
   )
 }
-
-Nav.propTypes = {
-
-};
 
 export default Nav;

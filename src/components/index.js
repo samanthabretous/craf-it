@@ -1,10 +1,10 @@
-import Home from './Home';
+import Heart from './Heart';
 import Nav from './Nav';
 import PostItem from './PostItem';
 import Posts from './Posts';
 
 export {
-  Home,
+  Heart,
   Nav,
   PostItem,
   Posts,

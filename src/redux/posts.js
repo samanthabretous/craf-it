@@ -1,8 +1,8 @@
 import axios from 'axios';
-import _ from 'lodash';
 
 export const GET_ALL_POSTS ='get_all_posts';
 export const ADD_FAV ='add_fav';
+export const REMOVE_FAV ='remove_fav';
 
 export const getAllPosts = (posts) => (
   {
@@ -18,6 +18,13 @@ export const getPostsAysnc = (category) => (dispatch) => (
   })
 );
 
+export const removeFavorite = (postId) => (
+  {
+    type: REMOVE_FAV,
+    postId
+  }
+)
+
 export const addFavorite = (post) => (
   {
     type: ADD_FAV,
@@ -30,25 +37,37 @@ const INITIAL_STATE = {
   post: null,
   favoritePosts: [],
 }
-const getPostFromStorage = () => {
+const getPostsFromStorage = () => {
   return JSON.parse(localStorage.getItem('favoritePosts'));
 }
 
-export default function(state = INITIAL_STATE, action) {
+const setPostsToStorage = (posts) => {
+  return localStorage.setItem('favoritePosts', JSON.stringify(posts));
+};
+
+export default (state = INITIAL_STATE, action) => {
   switch(action.type){
     case GET_ALL_POSTS:
-      let key = Object.keys(action)[1]
-      return Object.assign({}, state, { [key]: action[key] })
+      let key = Object.keys(action)[1];
+      return Object.assign({}, state, { [key]: action[key] });
+    case REMOVE_FAV:
+      let removedPost = null;
+      if(getPostsFromStorage()) {
+        removedPost = getPostsFromStorage().filter(({ data }) => {
+          console.log(action.postId, data.id);
+          return action.postId !== data.id
+        })
+        setPostsToStorage(removedPost);
+      }
+      return Object.assign({}, state, { favoritePosts: removedPost});
     case ADD_FAV:
       // store user favorites into localStorage
-      console.log(getPostFromStorage());
-      console.log(action.post);
-      const favoritePosts = getPostFromStorage()
-        ? [...getPostFromStorage(), action.post]
+      const favoritePosts = getPostsFromStorage()
+        ? [...getPostsFromStorage(), action.post]
         : [action.post];
-      localStorage.setItem('favoritePosts', JSON.stringify(favoritePosts));
-      return Object.assign({}, state, { favoritePosts })
+      setPostsToStorage(favoritePosts);
+      return Object.assign({}, state, { favoritePosts });
     default:
-      return state
+      return state;
   }
 }
